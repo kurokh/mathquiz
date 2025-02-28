@@ -1,0 +1,45 @@
+nextgenmath/
+├── backend/
+│   ├── app/
+│   │   ├── Console/
+│   │   ├── Exceptions/
+│   │   ├── Http/
+│   │   │   ├── Controllers/
+│   │   │   │   ├── Controller.php
+│   │   │   │   └── MathQuestionController.php
+│   │   ├── Models/
+│   │   │   └── MathQuestion.php
+│   ├── bootstrap/
+│   ├── config/
+│   ├── database/
+│   │   ├── factories/
+│   │   ├── migrations/
+│   │   └── seeders/
+│   │       └── MathQuestionsSeeder.php
+│   ├── public/
+│   ├── resources/
+│   │   ├── views/
+│   │   └── js/
+│   ├── routes/
+│   │   ├── api.php
+│   │   └── web.php
+│   ├── Dockerfile
+│   └── .env  
+├── frontend/
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── ...
+│   └── (other frontend files)
+├── docker-compose.yml         
+├── .env                        
+├── terraform/
+│   ├── main.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   └── ...
+└── kubernetes/
+    ├── backend-deployment.yaml
+    ├── backend-service.yaml
+    ├── frontend-deployment.yaml
+    ├── frontend-service.yaml
+    └── ...

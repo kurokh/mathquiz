@@ -1,0 +1,12 @@
+dist/
+build/
+
+.DS_STORE
+
+.env
+*.sublime-workspace
+*.sublime-project
+terraform.tfvars
+mathquix-95bee8a22869.json
+terraform/.terraform
+.terraform/

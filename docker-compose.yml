@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ${DOCKERFILE}
+    container_name: nextgenmath-backend
+    volumes:
+      - ./backend:/var/www
+      - ./.env:/var/www/.env
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_SUBPORT}"
+    depends_on:
+      - db
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_DEBUG=${APP_DEBUG}
+      - DB_CONNECTION=${DB_CONNECTION}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ${DOCKERFILE}
+      args:
+        VITE_OPENAI_API_KEY: ${VITE_OPENAI_API_KEY}
+        VITE_BACKEND_API_URL: ${VITE_BACKEND_API_URL}
+    container_name: nextgenmath-frontend
+    volumes:
+      - ./frontend:/app
+      - node_modules_frontend:/app/node_modules
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - VITE_OPENAI_API_KEY=${VITE_OPENAI_API_KEY}
+      - VITE_BACKEND_API_URL=${VITE_BACKEND_API_URL}
+
+  db:
+    image: mysql:8
+    container_name: nextgenmath-db
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+
+volumes:
+  dbdata:
+  node_modules_frontend:
